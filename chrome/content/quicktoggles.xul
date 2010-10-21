@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" 
+		src="chrome://quicktoggles/content/quicktoggles.js"/>
+	<script language="JavaScript">
+		try { 
+			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);  
+			var enumerator = wm.getEnumerator("navigator:browser");  
+			while (enumerator.hasMoreElements()) {  
+				var win = enumerator.getNext();
+				win.addEventListener("load", quickTogglesInit, false); 
+			}
+		} catch (e) { 
+			alert("caught exception adding event listener for quickTogglesInit(): " + e); 
+		}
+	</script>
+
+	<statusbar id="status-bar">
+		<statusbarpanel id="quick-proxy">
+			<label id="quick-proxy-label" value="Proxy ???" onclick="toggleProxy(event)" />
+			<textbox id="quick-proxy-value" onchange="updateProxy(event)" style="text-align:center;width:16em;font-size:x-small;"/>
+		</statusbarpanel>
+		<statusbarpanel id="quick-cookies" onclick="toggleCookies(event);">
+			<label id="quick-cookies-label" value="Cookies ???" />
+		</statusbarpanel>	
+		<statusbarpanel id="quick-javascript" onclick="toggleJavascript(event);">
+			<label id="quick-javascript-label" value="Javascript ???" />
+		</statusbarpanel>	
+	</statusbar>
+
+</overlay>
+
+<!-- vim: set sw=8 noet: -->

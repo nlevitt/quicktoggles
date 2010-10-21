@@ -1,0 +1,2 @@
+content quicktoggles chrome/content/
+overlay chrome://browser/content/browser.xul chrome://quicktoggles/content/quicktoggles.xul
