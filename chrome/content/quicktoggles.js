@@ -97,9 +97,10 @@ if ("undefined" == typeof(QuickToggles)) {
 					this.updateValues("quick-proxy-value", document.getElementById("quick-proxy-value").value);
 				} else {
 					alert("Not a valid proxy: should be host:port");
+					prefs.setIntPref("network.proxy.type", 0);
+					this.updateLabels("quick-proxy-label", false);
 					document.getElementById("quick-proxy-value").focus();
 				}
-
 			}
 		},
 		
