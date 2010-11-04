@@ -4,7 +4,6 @@ if ("undefined" == typeof(QuickToggles)) {
 		init : function(event) {
 			let prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 
-			// i'm not sure why this.foo() doesn't work here, but does work elsewhere
 			QuickToggles.updateLabels("quick-cookies-label", prefs.getIntPref("network.cookie.cookieBehavior") == 0);
 			QuickToggles.updateLabels("quick-javascript-label", prefs.getBoolPref("javascript.enabled"));
 			QuickToggles.updateLabels("quick-proxy-label", prefs.getIntPref("network.proxy.type") == 1);
@@ -96,7 +95,11 @@ if ("undefined" == typeof(QuickToggles)) {
 				if (!isNaN(port)) {
 					this.setProxy(proxy[0], port);
 					this.updateValues("quick-proxy-value", document.getElementById("quick-proxy-value").value);
+				} else {
+					alert("Not a valid proxy: should be host:port");
+					document.getElementById("quick-proxy-value").focus();
 				}
+
 			}
 		},
 		
@@ -114,7 +117,8 @@ if ("undefined" == typeof(QuickToggles)) {
 					prefs.setIntPref("network.proxy.type", 1);
 					this.updateValues("quick-proxy-value", document.getElementById("quick-proxy-value").value);
 				} else {
-					alert("not a valid proxy - should be host:port");
+					alert("Not a valid proxy: should be host:port");
+					document.getElementById("quick-proxy-value").focus();
 				}
 			} else {
 				prefs.setIntPref("network.proxy.type", 0);
